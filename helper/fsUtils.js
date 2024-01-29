@@ -9,7 +9,10 @@ const writeToFile = (destination, content) => fs.writeFile(destination, JSON.str
 const readAndAppend = (content, file) => {
 	fs.readFile(file, "utf8", (err, data) => {
 		if (err) {
-			console.error(err);
+			if(file) {
+				writeToFile(file, [content])
+			}
+			
 		} else {
 			const parsedData = JSON.parse(data);
 			parsedData.push(content);
